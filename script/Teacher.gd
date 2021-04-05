@@ -42,7 +42,7 @@ func _ready():
 	var path = "teacher/%s/teachers/" %Firebase.user_info.id
 	Firebase.get_document(path,get_node("HTTPRequest"))
 	
-func on_item_button_pressed(item_name,button_name):
+func on_item_button_pressed(item_name:String,button_name:String):
 	selected = int(item_name)-1
 	selected_id = Global.all_teacher_data.documents[selected].name.split("/",true,0)[-1]
 	if button_name == "view":
@@ -146,7 +146,7 @@ func _on_LoadPicture_pressed():
 func _on_ClearPicture_pressed():
 	_on_OptionButton_item_selected(EditGender.selected)
 
-func _on_OptionButton_item_selected(index):
+func _on_OptionButton_item_selected(index:int):
 	#loads defauld image based upon gender selection
 	var profile = get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Profile")
 	if index == 0:

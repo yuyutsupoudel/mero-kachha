@@ -57,7 +57,7 @@ func set_student_data(data:Dictionary):
 	get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table/"+new_item.name+"/Phone").text = data.phone.stringValue
 	get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table/"+new_item.name+"/Email").text =  data.email.stringValue
 
-func on_item_button_pressed(item_name,button_name):
+func on_item_button_pressed(item_name:String,button_name:String):
 	selected = int(item_name)-1
 	selected_id = all_student_data.documents[selected].name.split("/",true,0)[-1]
 	if button_name == "view":
@@ -143,33 +143,7 @@ func set_classes_template():
 			get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container/"+new_item.name+"/RowId").text = Global.all_class_data.documents[i].fields.id.stringValue
 			get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container/"+new_item.name+"/RowName").text = Global.all_class_data.documents[i].fields.name.stringValue
 
-func _on_HTTPRequest_request_completed(result, response_code, headers, body):
-	if response_code==0:
-		textbox.set_text("CAN NOT CONNECT TO THE SERVER.")
-		yield(get_tree().create_timer(2.0),"timeout")
-		textbox.text=""
-		return
-	if response_code==404:
-		textbox.text = "Wow! Such a empty place."
-		return
-	var response_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	if response_code!=200:
-		textbox.text = response_body.error.message.capitalize()
-		yield(get_tree().create_timer(2.0),"timeout")
-		textbox.text=""
-		return
-	if response_body.empty():
-		print(response_code)
-		textbox.text = "Wow! Such a empty place."
-		return
-	all_student_data = response_body
-	textbox.text=""
-	textbox.visible = false
-	for i in range(0,all_student_data.documents.size()):
-		var student_info =all_student_data.documents[i].fields
-		set_student_data(student_info)
-
-func _on_EditGender_item_selected(index):
+func _on_EditGender_item_selected(index:int):
 	profile = get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Profile")
 	if index == 0:
 		profile.texture = gender_male
@@ -241,6 +215,88 @@ func _on_Save_pressed():
 		var path = "student/"+Firebase.user_info.id+"/students/%s" %selected_id
 		Firebase.update_document(path,profile,get_node("HTTPRequest3"))
 
+func _on_Refresh_pressed():
+	sn=0
+	textbox.show()
+	var node = get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table")
+	for n in node.get_children():
+		if n.name !="Label":
+			node.remove_child(n)
+			n.queue_free()
+	_ready()
+
+func _on_DeleteTeacher_pressed():
+	get_node("WarningDialog").popup()
+
+func _on_WarningYes_pressed():
+	get_node("WarningDialog").hide()
+	viewTextbox.text="Deleting student data(1/2).."
+	var path = "student/"+Firebase.user_info.id+"/students/%s" %selected_id
+	Firebase.delete_document(path,get_node("HTTPRequest6"))
+
+func _on_WarningCancel_pressed():
+	get_node("WarningDialog").hide()
+
+func _on_LoadPicture_pressed():
+	get_node("FileDialog").popup()
+
+func _on_ClearPicture_pressed():
+	 _on_EditGender_item_selected(EditGender.text)
+
+func _on_Cancel_pressed():
+	get_node("EditDialog").hide
+
+func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+	
+	if response_code==0:
+		textbox.set_text("CAN NOT CONNECT TO THE SERVER.")
+		yield(get_tree().create_timer(2.0),"timeout")
+		textbox.text=""
+		return
+	if response_code==404:
+		textbox.text = "Wow! Such a empty place."
+		return
+	var response_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	if response_code!=200:
+		textbox.text = response_body.error.message.capitalize()
+		yield(get_tree().create_timer(2.0),"timeout")
+		textbox.text=""
+		return
+	if response_body.empty():
+		print(response_code)
+		textbox.text = "Wow! Such a empty place."
+		return
+	all_student_data = response_body
+	textbox.text=""
+	textbox.visible = false
+	for i in range(0,all_student_data.documents.size()):
+		var student_info =all_student_data.documents[i].fields
+		set_student_data(student_info)
+		
+func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
+	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	if response_code!= 200:
+		EditTextbox.text = response_body.error.message
+		yield(get_tree().create_timer(2.0),"timeout")
+		textbox.text=""
+	else:
+		_on_Refresh_pressed()
+		EditTextbox.text = "Student created sucessfully."
+		yield(get_tree().create_timer(2.0),"timeout")
+		textbox.text=""
+
+func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
+	var response_body:=JSON.parse(body.get_string_from_ascii())
+	if response_code!= 200:
+		EditTextbox.text = response_body.result.error.message
+		yield(get_tree().create_timer(2.0),"timeout")
+		EditTextbox.text=""
+	else:
+		_on_Refresh_pressed()
+		EditTextbox.text = "Data updated sucessfully."
+		yield(get_tree().create_timer(2.0),"timeout")
+		EditTextbox.text=""
+
 func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 	var response_body := JSON.parse(body.get_string_from_ascii())
 	if response_code!= 200:
@@ -264,28 +320,6 @@ func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 		var path = "user_type?documentId=%s"%profile.email.stringValue
 		Firebase.save_document(path,user_type,get_node("HTTPRequest5"))
 
-func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
-	var response_body:=JSON.parse(body.get_string_from_ascii())
-	if response_code!= 200:
-		EditTextbox.text = response_body.result.error.message
-		yield(get_tree().create_timer(2.0),"timeout")
-		EditTextbox.text=""
-	else:
-		_on_Refresh_pressed()
-		EditTextbox.text = "Data updated sucessfully."
-		yield(get_tree().create_timer(2.0),"timeout")
-		EditTextbox.text=""
-
-func _on_Refresh_pressed():
-	sn=0
-	textbox.show()
-	var node = get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table")
-	for n in node.get_children():
-		if n.name !="Label":
-			node.remove_child(n)
-			n.queue_free()
-	_ready()
-
 func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
 	if response_code==0:
 		EditTextbox.text="CONNECTION ERROR:Account created but data is not saved."
@@ -298,28 +332,8 @@ func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
 	var path = "student/"+Firebase.user_info.id+"/students?documentId=%s" %profile.email.stringValue
 	Firebase.save_document(path,profile,get_node("HTTPRequest2"))
 
-func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
-	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	if response_code!= 200:
-		EditTextbox.text = response_body.error.message
-		yield(get_tree().create_timer(2.0),"timeout")
-		textbox.text=""
-	else:
-		_on_Refresh_pressed()
-		EditTextbox.text = "Student created sucessfully."
-		yield(get_tree().create_timer(2.0),"timeout")
-		textbox.text=""
-
-func _on_DeleteTeacher_pressed():
-	get_node("WarningDialog").popup()
-
-func _on_WarningYes_pressed():
-	get_node("WarningDialog").hide()
-	viewTextbox.text="Deleting student data(1/2).."
-	var path = "student/"+Firebase.user_info.id+"/students/%s" %selected_id
-	Firebase.delete_document(path,get_node("HTTPRequest6"))
-
 func _on_HTTPRequest6_request_completed(result, response_code, headers, body):
+	
 	if response_code==200:
 		viewTextbox.text="Deleting student data(2/2)...."
 		var path = "user_type/%s" %selected_id
@@ -329,7 +343,7 @@ func _on_HTTPRequest6_request_completed(result, response_code, headers, body):
 		viewTextbox.text=response_body.result.error.message
 		yield(get_tree().create_timer(2.0),"timeout")
 		viewTextbox.text=""
-
+		
 func _on_HTTPRequest7_request_completed(result, response_code, headers, body):
 	if response_code==200:
 		_on_Refresh_pressed()
@@ -338,18 +352,3 @@ func _on_HTTPRequest7_request_completed(result, response_code, headers, body):
 		viewTextbox.text=""
 	else:
 		viewTextbox.text="ERROR:Data deleted but id is still present."
-
-func _on_WarningCancel_pressed():
-	get_node("WarningDialog").hide()
-
-
-func _on_LoadPicture_pressed():
-	get_node("FileDialog").popup()
-
-
-func _on_ClearPicture_pressed():
-	 _on_EditGender_item_selected(EditGender.text)
-
-
-func _on_Cancel_pressed():
-	get_node("EditDialog").hide

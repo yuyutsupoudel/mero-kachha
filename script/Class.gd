@@ -34,7 +34,7 @@ func _ready():
 	textbox.text ="Connecting to database.."
 	Firebase.get_document(path,get_node("HTTPRequest"))
 
-func on_item_button_pressed(item_name,button_name):
+func on_item_button_pressed(item_name : String, button_name : String):
 	selected = int(item_name)-1
 	if button_name == "view":
 		save_button_state="view"
@@ -138,27 +138,11 @@ func set_class_data(data : Dictionary):
 	get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table/"+new_item.name+"/Tag").text=data.tag.stringValue
 	get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table/"+new_item.name+"/Teacher").text=data.teacher.stringValue
 	
-func _on_HTTPRequest_request_completed(result, response_code, headers, body):
-	if response_code==0:
-		textbox.set_text("CAN NOT CONNECT TO THE SERVER.")
-		return
-	
-	if response_code==404:
-		textbox.text = "Wow! Such a empty place."
-		return
-	var response_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	if response_code!=200:
-		textbox.text = response_body.error.message.capitalize()
-		yield(get_tree().create_timer(2.0),"timeout")
-		textbox.text="End"
-		return
-	textbox.text=""
-	textbox.visible = false
-	if response_body.has("documents"):
-		Global.all_class_data = response_body
-		for i in range(0,response_body.documents.size()):
-			class_info =response_body.documents[i].fields
-			set_class_data(class_info)
+func _on_WarningYes_pressed():
+	get_node("WarningDialog").hide()
+	NotificationLabel.text=("(1/1) Deleting class data..")
+	var path = "class/"+Firebase.user_info.id+"/classes/%s" %LabelId.text
+	Firebase.delete_document(path,get_node("HTTPRequest5"))
 
 func _on_Refresh_pressed():
 	sn=0
@@ -211,6 +195,28 @@ func _on_Button2_pressed():
 		var path = "class/"+Firebase.user_info.id+"/classes/%s" %EditId.text
 		Firebase.update_document(path,class_info,get_node("HTTPRequest3"))
 	#----------------------------------------------------------------------
+func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+	if response_code==0:
+		textbox.set_text("CAN NOT CONNECT TO THE SERVER.")
+		return
+	
+	if response_code==404:
+		textbox.text = "Wow! Such a empty place."
+		return
+	var response_body := JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	if response_code!=200:
+		textbox.text = response_body.error.message.capitalize()
+		yield(get_tree().create_timer(2.0),"timeout")
+		textbox.text="End"
+		return
+	textbox.text=""
+	textbox.visible = false
+	if response_body.has("documents"):
+		Global.all_class_data = response_body
+		for i in range(0,response_body.documents.size()):
+			class_info =response_body.documents[i].fields
+			set_class_data(class_info)
+
 func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 	if response_code==200:
 		NotificationLabel.text="(2/2) Updating teacher...."
@@ -249,11 +255,6 @@ func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 		yield(get_tree().create_timer(1.0),"timeout")
 		get_node("EditDialog").hide()
 		
-func _on_WarningYes_pressed():
-	get_node("WarningDialog").hide()
-	NotificationLabel.text=("(1/1) Deleting class data..")
-	var path = "class/"+Firebase.user_info.id+"/classes/%s" %LabelId.text
-	Firebase.delete_document(path,get_node("HTTPRequest5"))
 
 func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
 	if response_code==200:
