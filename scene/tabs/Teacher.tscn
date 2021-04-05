@@ -1,0 +1,1039 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://script/Teacher.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/male_teacher.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/exclamation.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/user_white.png" type="Texture" id=4]
+[ext_resource path="res://assets/Fonts/NotoSansJP-Bold.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/icons/sinchronize-16.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+use_filter = true
+font_data = ExtResource( 5 )
+
+[node name="Teacher" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 36.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 34.0
+columns = 6
+
+[node name="label1" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_right = 80.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 80, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Sn"
+
+[node name="label2" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 84.0
+margin_right = 260.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Name"
+
+[node name="label3" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 264.0
+margin_right = 440.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Phone"
+
+[node name="label4" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 444.0
+margin_right = 620.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Facility"
+
+[node name="label5" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 624.0
+margin_right = 800.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Email"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 804.0
+margin_right = 1020.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 8.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+
+[node name="Refresh" type="Button" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
+margin_left = 12.0
+margin_right = 112.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.78186
+margin_top = -1.7818
+margin_right = 1.78186
+margin_bottom = -1.7818
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh/HBoxContainer"]
+margin_left = 12.0
+margin_right = 28.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh/HBoxContainer/CenterContainer"]
+margin_top = 8.0
+margin_right = 16.0
+margin_bottom = 24.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh/HBoxContainer"]
+margin_left = 32.0
+margin_top = 5.0
+margin_right = 88.0
+margin_bottom = 27.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Refresh"
+
+[node name="AddNew" type="Button" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
+margin_left = 116.0
+margin_right = 216.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew/HBoxContainer"]
+margin_left = 5.0
+margin_right = 21.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew/HBoxContainer/CenterContainer"]
+margin_top = 8.0
+margin_right = 16.0
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew/HBoxContainer"]
+margin_left = 25.0
+margin_top = 5.0
+margin_right = 94.0
+margin_bottom = 27.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " Add New"
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 38.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Table" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer"]
+margin_right = 1020.0
+margin_bottom = 558.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/Table"]
+margin_right = 1020.0
+margin_bottom = 22.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Loading.."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -188.0
+margin_right = 281.0
+margin_bottom = 222.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ViewDialog/VBoxContainer"]
+margin_right = 608.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewDialog/VBoxContainer"]
+margin_top = 26.0
+margin_right = 608.0
+margin_bottom = 407.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="ViewDialog/VBoxContainer/HBoxContainer"]
+margin_right = 274.0
+margin_bottom = 381.0
+custom_constants/margin_top = 15
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2"]
+margin_left = 10.0
+margin_top = 15.0
+margin_right = 274.0
+margin_bottom = 351.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 262.0
+margin_bottom = 334.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="Label" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_right = 260.0
+margin_bottom = 22.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "YUYUTSU POUDEL"
+align = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 260.0
+margin_bottom = 296.0
+
+[node name="Profile" type="TextureRect" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 258.0
+margin_bottom = 258.0
+texture = ExtResource( 2 )
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 310.0
+margin_right = 260.0
+margin_bottom = 332.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="DeleteTeacher" type="Button" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 80.0
+margin_right = 180.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 100, 0 )
+custom_constants/hseparation = 0
+text = "Delete"
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewDialog/VBoxContainer/HBoxContainer"]
+margin_left = 278.0
+margin_right = 608.0
+margin_bottom = 381.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 320.0
+margin_bottom = 351.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 303.0
+margin_bottom = 334.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Data" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+margin_right = 301.0
+margin_bottom = 332.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+alignment = 1
+
+[node name="Field" type="HBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data"]
+margin_right = 301.0
+margin_bottom = 178.0
+
+[node name="Type" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field"]
+margin_right = 60.0
+margin_bottom = 178.0
+
+[node name="ViewId" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_right = 60.0
+margin_bottom = 22.0
+text = "ID"
+
+[node name="ViewName" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_top = 26.0
+margin_right = 60.0
+margin_bottom = 48.0
+text = "Name "
+
+[node name="ViewPhone" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_top = 52.0
+margin_right = 60.0
+margin_bottom = 74.0
+text = "Phone"
+
+[node name="ViewEmail" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_top = 78.0
+margin_right = 60.0
+margin_bottom = 100.0
+text = "Email"
+
+[node name="ViewFacility" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_top = 104.0
+margin_right = 60.0
+margin_bottom = 126.0
+text = "Facility"
+
+[node name="ViewAddress" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_top = 130.0
+margin_right = 60.0
+margin_bottom = 152.0
+text = "Address"
+
+[node name="ViewGender" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Type"]
+margin_top = 156.0
+margin_right = 60.0
+margin_bottom = 178.0
+text = "Gender"
+
+[node name="Seperator" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field"]
+margin_left = 64.0
+margin_right = 76.0
+margin_bottom = 178.0
+
+[node name="ViewId" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_right = 12.0
+margin_bottom = 22.0
+text = ":"
+
+[node name="ViewName" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_top = 26.0
+margin_right = 12.0
+margin_bottom = 48.0
+text = ":"
+
+[node name="ViewPhone" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_top = 52.0
+margin_right = 12.0
+margin_bottom = 74.0
+text = ":"
+
+[node name="ViewEmail" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_top = 78.0
+margin_right = 12.0
+margin_bottom = 100.0
+text = ":"
+
+[node name="ViewFacility" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_top = 104.0
+margin_right = 12.0
+margin_bottom = 126.0
+text = ":"
+
+[node name="ViewAddress" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_top = 130.0
+margin_right = 12.0
+margin_bottom = 152.0
+text = ":"
+
+[node name="ViewGender" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Seperator"]
+margin_top = 156.0
+margin_right = 12.0
+margin_bottom = 178.0
+text = ":"
+
+[node name="Value" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field"]
+margin_left = 80.0
+margin_right = 140.0
+margin_bottom = 178.0
+
+[node name="ViewId" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_right = 60.0
+margin_bottom = 22.0
+text = "ID"
+
+[node name="ViewName" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_top = 26.0
+margin_right = 60.0
+margin_bottom = 48.0
+text = "Name "
+
+[node name="ViewPhone" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_top = 52.0
+margin_right = 60.0
+margin_bottom = 74.0
+text = "Phone"
+
+[node name="ViewEmail" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_top = 78.0
+margin_right = 60.0
+margin_bottom = 100.0
+text = "Email"
+
+[node name="ViewFacility" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_top = 104.0
+margin_right = 60.0
+margin_bottom = 126.0
+text = "Facility"
+
+[node name="ViewAddress" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_top = 130.0
+margin_right = 60.0
+margin_bottom = 152.0
+text = "Address"
+
+[node name="ViewGender" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value"]
+margin_top = 156.0
+margin_right = 60.0
+margin_bottom = 178.0
+text = "Gender"
+
+[node name="Panel" type="Panel" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data"]
+margin_top = 186.0
+margin_right = 301.0
+margin_bottom = 332.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer"]
+margin_right = 301.0
+margin_bottom = 22.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClassName" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer/HBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Class Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClassId" type="Label" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 152.0
+margin_right = 301.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Class Id:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewClassList" type="ScrollContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer"]
+margin_top = 26.0
+margin_right = 301.0
+margin_bottom = 146.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Table" type="VBoxContainer" parent="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer/ViewClassList"]
+margin_right = 301.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditDialog" type="WindowDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -188.0
+margin_right = 281.0
+margin_bottom = 222.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.33484
+margin_bottom = -1.33484
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer"]
+margin_right = 608.0
+margin_bottom = 22.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer"]
+margin_top = 26.0
+margin_right = 608.0
+margin_bottom = 410.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="EditDialog/VBoxContainer/HBoxContainer"]
+margin_right = 270.0
+margin_bottom = 384.0
+custom_constants/margin_top = 15
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2"]
+margin_left = 10.0
+margin_top = 15.0
+margin_right = 270.0
+margin_bottom = 354.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 258.0
+margin_bottom = 337.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 3.0
+margin_right = 256.0
+margin_bottom = 25.0
+size_flags_vertical = 6
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 0
+text = "ADD NEW TEACHER"
+align = 1
+
+[node name="Profile" type="TextureRect" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 43.0
+margin_right = 256.0
+margin_bottom = 299.0
+texture = ExtResource( 2 )
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 313.0
+margin_right = 256.0
+margin_bottom = 335.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="LoadPicture" type="Button" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 103.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Load Picture"
+
+[node name="ClearPicture" type="Button" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 153.0
+margin_right = 256.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Clear Picture"
+
+[node name="MarginContainer" type="MarginContainer" parent="EditDialog/VBoxContainer/HBoxContainer"]
+margin_left = 274.0
+margin_right = 608.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 324.0
+margin_bottom = 354.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 307.0
+margin_bottom = 337.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_right = 305.0
+margin_bottom = 283.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 68.0
+margin_bottom = 283.0
+size_flags_vertical = 3
+custom_constants/separation = 6
+alignment = 1
+
+[node name="EditId" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 18.0
+margin_right = 68.0
+margin_bottom = 40.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ID"
+
+[node name="EditPhone" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 46.0
+margin_right = 68.0
+margin_bottom = 68.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Phone"
+
+[node name="EditName" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 74.0
+margin_right = 68.0
+margin_bottom = 96.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Name "
+
+[node name="EditEmail" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 102.0
+margin_right = 68.0
+margin_bottom = 124.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Email"
+
+[node name="EditPassword" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 130.0
+margin_right = 68.0
+margin_bottom = 152.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Password"
+
+[node name="EditPassword2" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 158.0
+margin_right = 68.0
+margin_bottom = 180.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Password"
+
+[node name="EditFacility" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 186.0
+margin_right = 68.0
+margin_bottom = 208.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Facility"
+
+[node name="EditAddress" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 214.0
+margin_right = 68.0
+margin_bottom = 236.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Address"
+
+[node name="EditGender" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Name"]
+margin_top = 242.0
+margin_right = 68.0
+margin_bottom = 264.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Gender"
+
+[node name="Dash" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 72.0
+margin_right = 84.0
+margin_bottom = 283.0
+size_flags_vertical = 3
+custom_constants/separation = 6
+alignment = 1
+
+[node name="Dash9" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 18.0
+margin_right = 12.0
+margin_bottom = 40.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash8" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 46.0
+margin_right = 12.0
+margin_bottom = 68.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash7" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 74.0
+margin_right = 12.0
+margin_bottom = 96.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash6" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 102.0
+margin_right = 12.0
+margin_bottom = 124.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash5" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 130.0
+margin_right = 12.0
+margin_bottom = 152.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash4" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 158.0
+margin_right = 12.0
+margin_bottom = 180.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash3" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 186.0
+margin_right = 12.0
+margin_bottom = 208.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash2" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 214.0
+margin_right = 12.0
+margin_bottom = 236.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Dash1" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Dash"]
+margin_top = 242.0
+margin_right = 12.0
+margin_bottom = 264.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = ":"
+
+[node name="Data" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 88.0
+margin_right = 305.0
+margin_bottom = 283.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 6
+alignment = 1
+
+[node name="EditId" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 18.0
+margin_right = 217.0
+margin_bottom = 40.0
+placeholder_text = "Unique ID number"
+
+[node name="EditPhone" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 46.0
+margin_right = 217.0
+margin_bottom = 68.0
+
+[node name="EditName" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 74.0
+margin_right = 217.0
+margin_bottom = 96.0
+
+[node name="EditEmail" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 102.0
+margin_right = 217.0
+margin_bottom = 124.0
+placeholder_text = "Unique Email address"
+
+[node name="EditPassword" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 130.0
+margin_right = 217.0
+margin_bottom = 152.0
+secret = true
+
+[node name="EditPassword2" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 158.0
+margin_right = 217.0
+margin_bottom = 180.0
+secret = true
+
+[node name="EditFacility" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 186.0
+margin_right = 217.0
+margin_bottom = 208.0
+
+[node name="EditAddress" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 214.0
+margin_right = 217.0
+margin_bottom = 236.0
+
+[node name="EditGender" type="OptionButton" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
+margin_top = 242.0
+margin_right = 217.0
+margin_bottom = 264.0
+text = "Male"
+items = [ "Male", null, false, 0, null, "Female", null, false, 1, null, "Other", null, false, 2, null ]
+selected = 0
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 287.0
+margin_right = 305.0
+margin_bottom = 309.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "*Class have to be assigned from class tab."
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 313.0
+margin_right = 305.0
+margin_bottom = 335.0
+size_flags_horizontal = 3
+custom_constants/separation = 50
+
+[node name="Cancel" type="Button" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 127.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="Save" type="Button" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 177.0
+margin_right = 305.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="WarningDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -242.003
+margin_top = -149.956
+margin_right = 231.997
+margin_bottom = 187.044
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="WarningDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 30
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WarningDialog/MarginContainer"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 444.0
+margin_bottom = 333.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WarningDialog/MarginContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 366.0
+margin_bottom = 303.0
+custom_constants/separation = 25
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 128.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 95.0
+margin_right = 223.0
+margin_bottom = 128.0
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 153.0
+margin_right = 318.0
+margin_bottom = 175.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ARE YOU SURE?"
+align = 1
+
+[node name="Label2" type="Label" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 200.0
+margin_right = 318.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 318, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "This action is permanent, and cannot be undone. Once deleted, any content linked to this user can not be recovered."
+align = 3
+autowrap = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 281.0
+margin_right = 318.0
+margin_bottom = 303.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="WarningCancel" type="Button" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 134.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="WarningYes" type="Button" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 184.0
+margin_right = 318.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Yes"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -63.0
+margin_right = 117.0
+margin_bottom = 97.0
+window_title = ""
+dialog_text = "Can not save item. Got erro radsf nas dfk  jada sdfasdf s fasdjfajdf dasf asdf agreg afg shs sar asdd  asf aasd wef sda vsd few dsaf acg re  dsva sdafsdf eadsfawef "
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -188.0
+margin_right = 281.0
+margin_bottom = 222.0
+window_title = "Open a File"
+mode = 0
+access = 2
+current_dir = "/home/yuyutsu/Projects/Godot Projects/admin-pannel"
+current_path = "/home/yuyutsu/Projects/Godot Projects/admin-pannel/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest3" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest4" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest5" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest6" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest7" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh" to="." method="_on_Refresh_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew" to="." method="_on_AddNew_pressed"]
+[connection signal="pressed" from="ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/DeleteTeacher" to="." method="_on_DeleteTeacher_pressed"]
+[connection signal="pressed" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/LoadPicture" to="." method="_on_LoadPicture_pressed"]
+[connection signal="pressed" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/ClearPicture" to="." method="_on_ClearPicture_pressed"]
+[connection signal="item_selected" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data/EditGender" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/WarningYes" to="." method="_on_WarningYes_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="request_completed" from="HTTPRequest2" to="." method="_on_HTTPRequest2_request_completed"]
+[connection signal="request_completed" from="HTTPRequest3" to="." method="_on_HTTPRequest3_request_completed"]
+[connection signal="request_completed" from="HTTPRequest4" to="." method="_on_HTTPRequest4_request_completed"]
+[connection signal="request_completed" from="HTTPRequest5" to="." method="_on_HTTPRequest5_request_completed"]
+[connection signal="request_completed" from="HTTPRequest6" to="." method="_on_HTTPRequest6_request_completed"]
+[connection signal="request_completed" from="HTTPRequest7" to="." method="_on_HTTPRequest7_request_completed"]

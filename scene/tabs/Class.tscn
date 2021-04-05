@@ -1,0 +1,593 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://script/Class.gd" type="Script" id=1]
+[ext_resource path="res://assets/Fonts/NotoSansJP-Bold.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/textures/exclamation.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/chalkboard_white.png" type="Texture" id=4]
+[ext_resource path="res://assets/Fonts/NotoSansJP-Regular.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/icons/sinchronize-16.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/presentation.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/user_white.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+use_filter = true
+font_data = ExtResource( 5 )
+
+[node name="Class" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 36.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 34.0
+columns = 5
+
+[node name="label1" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_right = 80.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 80, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Id"
+
+[node name="label2" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 84.0
+margin_right = 315.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Name"
+
+[node name="label3" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 319.0
+margin_right = 550.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Tag"
+
+[node name="label4" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 554.0
+margin_right = 785.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Teacher"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 789.0
+margin_right = 1020.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 23.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+
+[node name="Refresh" type="Button" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
+margin_left = 27.0
+margin_right = 127.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh/HBoxContainer"]
+margin_left = 12.0
+margin_right = 28.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh/HBoxContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 16.0
+margin_bottom = 24.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh/HBoxContainer"]
+margin_left = 32.0
+margin_top = 5.0
+margin_right = 88.0
+margin_bottom = 27.0
+text = "Refresh"
+
+[node name="AddNew" type="Button" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
+margin_left = 131.0
+margin_right = 231.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew/HBoxContainer"]
+margin_left = 3.0
+margin_right = 19.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew/HBoxContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 16.0
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew/HBoxContainer"]
+margin_left = 23.0
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 27.0
+text = "  Add New"
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 558.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Table" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer"]
+margin_right = 1020.0
+margin_bottom = 556.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/Table"]
+margin_right = 1020.0
+margin_bottom = 22.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+text = "Loading.."
+align = 1
+
+[node name="EditDialog" type="WindowDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -188.0
+margin_right = 281.0
+margin_bottom = 222.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer"]
+margin_right = 608.0
+margin_bottom = 22.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer"]
+margin_top = 26.0
+margin_right = 608.0
+margin_bottom = 410.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="EditDialog/VBoxContainer/HBoxContainer"]
+margin_right = 270.0
+margin_bottom = 384.0
+custom_constants/margin_top = 15
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer3"]
+margin_left = 10.0
+margin_top = 15.0
+margin_right = 270.0
+margin_bottom = 354.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 258.0
+margin_bottom = 337.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/PanelContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 256.0
+margin_bottom = 43.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ADD NEW CLASS"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/PanelContainer/VBoxContainer"]
+margin_top = 57.0
+margin_right = 256.0
+margin_bottom = 313.0
+rect_min_size = Vector2( 256, 256 )
+texture = ExtResource( 8 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="EditDialog/VBoxContainer/HBoxContainer"]
+margin_left = 274.0
+margin_right = 608.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 324.0
+margin_bottom = 354.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 307.0
+margin_bottom = 337.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_right = 305.0
+margin_bottom = 135.0
+custom_constants/separation = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 62.0
+margin_bottom = 135.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 62.0
+margin_bottom = 22.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ID:"
+
+[node name="Label2" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 37.0
+margin_right = 62.0
+margin_bottom = 59.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Name:"
+
+[node name="Label3" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 74.0
+margin_right = 62.0
+margin_bottom = 96.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Tag:"
+
+[node name="Label4" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 111.0
+margin_right = 62.0
+margin_bottom = 133.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Teacher:"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 76.0
+margin_right = 305.0
+margin_bottom = 135.0
+size_flags_horizontal = 3
+custom_constants/separation = 15
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_right = 229.0
+margin_bottom = 22.0
+
+[node name="LabelId" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2"]
+margin_right = 112.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="EditId" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer2"]
+margin_left = 116.0
+margin_right = 229.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+placeholder_text = "Unique ID number"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_top = 37.0
+margin_right = 229.0
+margin_bottom = 59.0
+
+[node name="LabelName" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer3"]
+margin_right = 112.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="EditName" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer3"]
+margin_left = 116.0
+margin_right = 229.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_top = 74.0
+margin_right = 229.0
+margin_bottom = 96.0
+
+[node name="LabelTag" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer4"]
+margin_right = 112.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="EditTag" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer4"]
+margin_left = 116.0
+margin_right = 229.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_top = 111.0
+margin_right = 229.0
+margin_bottom = 135.0
+
+[node name="EditTeacher" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer"]
+margin_top = 1.0
+margin_right = 112.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="EditTeacherSelectable" type="OptionButton" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer"]
+margin_left = 116.0
+margin_right = 229.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+icon = ExtResource( 9 )
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 143.0
+margin_right = 305.0
+margin_bottom = 305.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/VBoxContainer5"]
+margin_right = 305.0
+margin_bottom = 22.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "	Discription:"
+
+[node name="EditDiscription" type="TextEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/VBoxContainer5"]
+margin_top = 26.0
+margin_right = 305.0
+margin_bottom = 162.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+wrap_enabled = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
+margin_top = 313.0
+margin_right = 305.0
+margin_bottom = 335.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Button" type="Button" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 127.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Close"
+
+[node name="Button2" type="Button" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 177.0
+margin_right = 305.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="WarningDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -242.003
+margin_top = -149.956
+margin_right = 231.997
+margin_bottom = 187.044
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="WarningDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 30
+custom_constants/margin_top = -21
+custom_constants/margin_left = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WarningDialog/MarginContainer"]
+margin_left = 30.0
+margin_top = -21.0
+margin_right = 444.0
+margin_bottom = 337.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WarningDialog/MarginContainer/HBoxContainer"]
+margin_right = 414.0
+margin_bottom = 358.0
+size_flags_horizontal = 3
+custom_constants/separation = 22
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 9.0
+margin_right = 414.0
+margin_bottom = 137.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 143.0
+margin_right = 271.0
+margin_bottom = 128.0
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 159.0
+margin_right = 414.0
+margin_bottom = 197.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ARE YOU SURE?"
+align = 1
+
+[node name="Label2" type="Label" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 219.0
+margin_right = 414.0
+margin_bottom = 305.0
+rect_min_size = Vector2( 318, 0 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_y = 0
+custom_constants/shadow_as_outline = 0
+text = "This action is permanent, and cannot be undone. Once deleted, any content linked to this  can not be recovered."
+autowrap = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 327.0
+margin_right = 414.0
+margin_bottom = 349.0
+custom_constants/separation = 200
+alignment = 1
+
+[node name="WarningCancel" type="Button" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 107.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="WarningYes" type="Button" parent="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 307.0
+margin_right = 414.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Yes"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -63.0
+margin_right = 117.0
+margin_bottom = 97.0
+dialog_text = "Can not save item. Got erro radsf nas dfk  jada sdfasdf s fasdjfajdf dasf asdf agreg afg shs sar asdd  asf aasd wef sda vsd few dsaf acg re  dsva sdafsdf eadsfawef "
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -188.0
+margin_right = 281.0
+margin_bottom = 222.0
+window_title = "Open a File"
+mode = 0
+access = 2
+current_dir = "/home/yuyutsu/Projects/Godot Projects/admin-pannel"
+current_path = "/home/yuyutsu/Projects/Godot Projects/admin-pannel/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest3" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest4" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest5" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/Refresh" to="." method="_on_Refresh_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/GridContainer/HBoxContainer/AddNew" to="." method="_on_AddNew_pressed"]
+[connection signal="pressed" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/HBoxContainer2/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="WarningDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/WarningYes" to="." method="_on_WarningYes_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="request_completed" from="HTTPRequest2" to="." method="_on_HTTPRequest2_request_completed"]
+[connection signal="request_completed" from="HTTPRequest3" to="." method="_on_HTTPRequest3_request_completed"]
+[connection signal="request_completed" from="HTTPRequest4" to="." method="_on_HTTPRequest4_request_completed"]
+[connection signal="request_completed" from="HTTPRequest5" to="." method="_on_HTTPRequest5_request_completed"]

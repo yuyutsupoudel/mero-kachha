@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+
+[node name="CheckButtonRow" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 0.0233333
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="RowId" type="Label" parent="."]
+margin_top = 10.0
+margin_right = 477.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "ClassID"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 481.0
+margin_top = 10.0
+margin_right = 485.0
+margin_bottom = 24.0
+text = ":"
+
+[node name="RowName" type="Label" parent="."]
+margin_left = 489.0
+margin_top = 10.0
+margin_right = 966.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Class Name"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+margin_left = 970.0
+margin_right = 1024.0
+margin_bottom = 34.0
+theme = ExtResource( 1 )

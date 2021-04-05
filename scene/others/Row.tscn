@@ -1,0 +1,38 @@
+[gd_scene format=2]
+
+[node name="Row" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RowName" type="Label" parent="."]
+margin_right = 506.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Row Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 510.0
+margin_right = 514.0
+margin_bottom = 600.0
+size_flags_vertical = 5
+text = ":"
+
+[node name="RowId" type="Label" parent="."]
+margin_left = 518.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Row Id"
+__meta__ = {
+"_edit_use_anchors_": false
+}

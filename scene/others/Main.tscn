@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scene/tabs/Class.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/tabs/About.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/tabs/Teacher.tscn" type="PackedScene" id=3]
+[ext_resource path="res://theme.tres" type="Theme" id=4]
+[ext_resource path="res://scene/tabs/Student.tscn" type="PackedScene" id=6]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Class" parent="TabContainer" instance=ExtResource( 1 )]
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Teacher" parent="TabContainer" instance=ExtResource( 3 )]
+visible = false
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="Student" parent="TabContainer" instance=ExtResource( 6 )]
+visible = false
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="About" parent="TabContainer" instance=ExtResource( 2 )]
+visible = false
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
