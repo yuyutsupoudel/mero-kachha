@@ -105,7 +105,7 @@ func on_item_button_pressed(item_name:String,button_name:String):
 					if n.get_child(0).text==all_student_data.documents[selected].fields.cls_id.arrayValue.values[i].stringValue:
 						n.get_child(3).pressed=true
 						break
-		
+		EditTextbox.text=""
 		EditId.editable = false
 		EditId.text=""
 		EditId.placeholder_text = "Id can not be changed."
@@ -135,13 +135,14 @@ func set_classes_template():
 		node.remove_child(n)
 		n.queue_free()
 		#checks if teacher is assigned any class or not
-	if Global.all_class_data.has("documents"):
-		for i in range(0,Global.all_class_data.documents.size()):
-			var new_item = template3.instance()
-			new_item.set_name(str(i))
-			EditClassList.add_child(new_item)
-			get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container/"+new_item.name+"/RowId").text = Global.all_class_data.documents[i].fields.id.stringValue
-			get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container/"+new_item.name+"/RowName").text = Global.all_class_data.documents[i].fields.name.stringValue
+	if Global.all_class_data!=null:
+		if Global.all_class_data.has("documents"):
+			for i in range(0,Global.all_class_data.documents.size()):
+				var new_item = template3.instance()
+				new_item.set_name(str(i))
+				EditClassList.add_child(new_item)
+				get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container/"+new_item.name+"/RowId").text = Global.all_class_data.documents[i].fields.id.stringValue
+				get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container/"+new_item.name+"/RowName").text = Global.all_class_data.documents[i].fields.name.stringValue
 
 func _on_EditGender_item_selected(index:int):
 	profile = get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Profile")
@@ -205,7 +206,7 @@ func _on_Save_pressed():
 			yield(get_tree().create_timer(2.0),"timeout")
 			EditTextbox.text="Please check Email or password."
 		else:
-			EditTextbox.text="(1/3) Registering teacher.."
+			EditTextbox.text="(1/3) Registering student.."
 			Firebase.register(EditEmail.text,EditPassword2.text,get_node("HTTPRequest4"))
 	
 	else:
@@ -244,7 +245,7 @@ func _on_ClearPicture_pressed():
 	 _on_EditGender_item_selected(EditGender.text)
 
 func _on_Cancel_pressed():
-	get_node("EditDialog").hide
+	get_node("EditDialog").hide()
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	
@@ -263,7 +264,6 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		textbox.text=""
 		return
 	if response_body.empty():
-		print(response_code)
 		textbox.text = "Wow! Such a empty place."
 		return
 	all_student_data = response_body
@@ -282,7 +282,8 @@ func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 	else:
 		_on_Refresh_pressed()
 		EditTextbox.text = "Student created sucessfully."
-		yield(get_tree().create_timer(2.0),"timeout")
+		yield(get_tree().create_timer(1.0),"timeout")
+		get_node("EditDialog").hide()
 		textbox.text=""
 
 func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
@@ -294,16 +295,16 @@ func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
 	else:
 		_on_Refresh_pressed()
 		EditTextbox.text = "Data updated sucessfully."
-		yield(get_tree().create_timer(2.0),"timeout")
+		yield(get_tree().create_timer(1.0),"timeout")
+		get_node("EditDialog").hide()
 		EditTextbox.text=""
 
 func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 	var response_body := JSON.parse(body.get_string_from_ascii())
 	if response_code!= 200:
-		print(response_body.result)
 		if response_body.result.error.message =="EMAIL_EXISTS":
 			EditTextbox.text = "Email already exists. Contact data administor to remove account or enter another email."
-			yield(get_tree().create_timer(5.0),"timeout")
+			yield(get_tree().create_timer(2.0),"timeout")
 			EditEmail.text=""
 			EditPassword.text=""
 			EditPassword2.text=""
@@ -348,7 +349,8 @@ func _on_HTTPRequest7_request_completed(result, response_code, headers, body):
 	if response_code==200:
 		_on_Refresh_pressed()
 		viewTextbox.text="Student deleted."
-		yield(get_tree().create_timer(2.0),"timeout")
+		yield(get_tree().create_timer(1.0),"timeout")
+		get_node("ViewDialog").hide()
 		viewTextbox.text=""
 	else:
 		viewTextbox.text="ERROR:Data deleted but id is still present."

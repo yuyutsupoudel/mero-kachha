@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="admin-pannel"
 run/main_scene="res://scene/others/index.tscn"
 run/low_processor_mode=true
+boot_splash/bg_color=Color( 0.196078, 0.207843, 0.270588, 1 )
 config/icon="res://icon.png"
 
 [autoload]

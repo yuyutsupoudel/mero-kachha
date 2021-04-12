@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://script/name.gd" type="Script" id=1]
+[ext_resource path="res://assets/Fonts/NotoSansJP-Bold.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/textures/line.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/background.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 15
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Scale"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect2:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NinePatchRect2:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 238, 2 ), Vector2( 0, 2 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "test"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect2:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 232, 2 ), Vector2( 0, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NinePatchRect2:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 9, 22 ), Vector2( 125, 22 ) ]
+}
+
+[node name="LineEdit" type="LineEdit"]
+margin_right = 144.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 250, 0 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+align = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Border" type="TextureRect" parent="."]
+visible = false
+margin_left = 1.0
+margin_top = 21.0
+margin_right = 251.0
+margin_bottom = 24.0
+rect_scale = Vector2( 1e-05, 1 )
+size_flags_horizontal = 4
+texture = ExtResource( 3 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Scale = SubResource( 4 )
+anims/test = SubResource( 5 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = -0.235962
+margin_top = -0.23597
+margin_right = 249.764
+margin_bottom = 23.764
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+margin_left = 9.0
+margin_top = 22.0
+margin_right = 241.0
+margin_bottom = 24.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="focus_entered" from="." to="." method="_on_Name_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_Name_focus_exited"]

@@ -90,11 +90,11 @@ func on_item_button_pressed(item_name : String, button_name : String):
 		EditTag.text=Global.all_class_data.documents[selected].fields.tag.stringValue
 		EditDiscription.text=Global.all_class_data.documents[selected].fields.discription.stringValue
 		#checks if teacher assigned to class still has id or not
-		for i in range(0,Global.all_teacher_data.documents.size()):
-			if Global.all_teacher_data.documents[i].fields.email.stringValue==Global.all_class_data.documents[selected].fields.teacherid.stringValue:
-				EditTeacherSelectable.selected=selected
-				print("yes")
-				break
+		if Global.all_teacher_data!=null:
+			for i in range(0,Global.all_teacher_data.documents.size()):
+				if Global.all_teacher_data.documents[i].fields.email.stringValue==Global.all_class_data.documents[selected].fields.teacherid.stringValue:
+					EditTeacherSelectable.selected=selected
+					break
 		get_node("EditDialog").popup()
 		
 func _on_AddNew_pressed():
@@ -155,51 +155,48 @@ func _on_Refresh_pressed():
 	_ready()
 
 func _on_Button2_pressed():
-	var class_info = {
-	"id":{"stringValue":EditId.text},
-	"name":{"stringValue":EditName.text},
-	"tag" : {"stringValue":EditTag.text},
-	"teacher":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.name.stringValue},
-	"teacherid":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.email.stringValue},
-	"discription":{"stringValue":EditDiscription.text}
-	}
-	local_teacher_data=Global.all_teacher_data.documents[EditTeacherSelectable.selected]
-	#adds class details into teacher
-	if "values" in local_teacher_data.fields.cls_id.arrayValue:
-		var is_not_present = true
-		#checks if new class added is already presented in teacher
-		print(local_teacher_data.fields.cls_id.arrayValue)
-		for i in range (0,local_teacher_data.fields.cls_id.arrayValue.values.size()):
-			if local_teacher_data.fields.cls_id.arrayValue.values[i].hash()=={"stringValue":EditId.text}.hash():
-				is_not_present = false
-				break
-		if is_not_present:
-			local_teacher_data.fields.cls_id.arrayValue.values.push_back({"stringValue":EditId.text})
-			local_teacher_data.fields.cls_name.arrayValue.values.push_back({"stringValue":EditName.text})
-	else:
-		local_teacher_data.fields["cls_id"]={"arrayValue":{"values":[{"stringValue":EditId.text}]}}
-		local_teacher_data.fields["cls_name"]={"arrayValue":{"values":[{"stringValue":EditName.text}]}}
-	#----------------------------------------------------------------------
-	if save_button_state=="new":
-		NotificationLabel.text="(1/2) Creating class.."
-		var http = get_node("HTTPRequest2")
-		var path = "class/"+Firebase.user_info.id+"/classes/?documentId=%s" %EditId.text
-		Firebase.save_document(path,class_info,http)
-	#----------------------------------------------------------------------
-	elif save_button_state=="view":
-		#Save button will act as delete if mode is "view"
+	if save_button_state=="view":
 		get_node("WarningDialog").popup()
-	#----------------------------------------------------------------------
-	elif save_button_state=="edit":
-		NotificationLabel.text="(1/2) Updating class.."
-		var path = "class/"+Firebase.user_info.id+"/classes/%s" %EditId.text
-		Firebase.update_document(path,class_info,get_node("HTTPRequest3"))
+	else:
+		var class_info = {
+		"id":{"stringValue":EditId.text},
+		"name":{"stringValue":EditName.text},
+		"tag" : {"stringValue":EditTag.text},
+		"teacher":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.name.stringValue},
+		"teacherid":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.email.stringValue},
+		"discription":{"stringValue":EditDiscription.text}
+		}
+		local_teacher_data=Global.all_teacher_data.documents[EditTeacherSelectable.selected]
+		#adds class details into teacher
+		if "values" in local_teacher_data.fields.cls_id.arrayValue:
+			var is_not_present = true
+			#checks if new class added is already presented in teacher
+			for i in range (0,local_teacher_data.fields.cls_id.arrayValue.values.size()):
+				if local_teacher_data.fields.cls_id.arrayValue.values[i].hash()=={"stringValue":EditId.text}.hash():
+					is_not_present = false
+					break
+			if is_not_present:
+				local_teacher_data.fields.cls_id.arrayValue.values.push_back({"stringValue":EditId.text})
+				local_teacher_data.fields.cls_name.arrayValue.values.push_back({"stringValue":EditName.text})
+		else:
+			local_teacher_data.fields["cls_id"]={"arrayValue":{"values":[{"stringValue":EditId.text}]}}
+			local_teacher_data.fields["cls_name"]={"arrayValue":{"values":[{"stringValue":EditName.text}]}}
+		#----------------------------------------------------------------------
+		if save_button_state=="new":
+			NotificationLabel.text="(1/2) Creating class.."
+			var http = get_node("HTTPRequest2")
+			var path = "class/"+Firebase.user_info.id+"/classes/?documentId=%s" %EditId.text
+			Firebase.save_document(path,class_info,http)
+		#----------------------------------------------------------------------
+		elif save_button_state=="edit":
+			NotificationLabel.text="(1/2) Updating class.."
+			var path = "class/"+Firebase.user_info.id+"/classes/%s" %EditId.text
+			Firebase.update_document(path,class_info,get_node("HTTPRequest3"))
 	#----------------------------------------------------------------------
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	if response_code==0:
 		textbox.set_text("CAN NOT CONNECT TO THE SERVER.")
 		return
-	
 	if response_code==404:
 		textbox.text = "Wow! Such a empty place."
 		return
@@ -209,14 +206,16 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		yield(get_tree().create_timer(2.0),"timeout")
 		textbox.text="End"
 		return
-	textbox.text=""
-	textbox.visible = false
+
 	if response_body.has("documents"):
+		textbox.text=""
+		textbox.visible = false
 		Global.all_class_data = response_body
 		for i in range(0,response_body.documents.size()):
 			class_info =response_body.documents[i].fields
 			set_class_data(class_info)
-
+	else:
+		textbox.text = "Wow! Such a empty place."
 func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 	if response_code==200:
 		NotificationLabel.text="(2/2) Updating teacher...."
@@ -242,28 +241,24 @@ func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
 		
 func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
-#	print(response_body)
 	if response_code!= 200:
 		textbox.text="Updating data failed. Retry again. "
-		yield(get_tree().create_timer(5.0),"timeout")
+		yield(get_tree().create_timer(2.0),"timeout")
 		textbox.text=""
 	else:
 		NotificationLabel.text=("Sucessfull.")
 		_on_Refresh_pressed()
-		yield(get_tree().create_timer(2.0),"timeout")
-		NotificationLabel.text=("")
 		yield(get_tree().create_timer(1.0),"timeout")
 		get_node("EditDialog").hide()
-		
+		NotificationLabel.text=("")
 
 func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
 	if response_code==200:
 		NotificationLabel.text=("Sucessfull.")
 		_on_Refresh_pressed()
-		yield(get_tree().create_timer(2.0),"timeout")
-		NotificationLabel.text=""
 		yield(get_tree().create_timer(1.0),"timeout")
 		get_node("EditDialog").hide()
+		NotificationLabel.text=""
 		NotificationLabel.text=""
 
 func _on_Button_pressed():

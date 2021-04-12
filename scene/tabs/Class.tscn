@@ -221,6 +221,10 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="EditDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -0.89093
+margin_top = -0.8909
+margin_right = -0.89093
+margin_bottom = -0.8909
 __meta__ = {
 "_edit_use_anchors_": false
 }

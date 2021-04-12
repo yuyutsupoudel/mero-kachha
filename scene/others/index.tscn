@@ -1,10 +1,39 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://script/index.gd" type="Script" id=1]
 [ext_resource path="res://assets/icons/lock.png" type="Texture" id=2]
 [ext_resource path="res://assets/icons/lock_white.png" type="Texture" id=3]
 [ext_resource path="res://theme.tres" type="Theme" id=4]
 [ext_resource path="res://assets/icons/user_white.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/school.png" type="Texture" id=6]
+[ext_resource path="res://assets/Fonts/Ananda 1 Hv Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/Fonts/NotoSansJP-Bold.otf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/Fonts/NotoSansJP-Regular.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://scene/others/LineEdit.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/icons/buttons/button_hold.png" type="Texture" id=11]
+[ext_resource path="res://assets/icons/buttons/button.png" type="Texture" id=12]
+[ext_resource path="res://assets/icons/buttons/button_pressed.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 61
+outline_color = Color( 0.0745098, 0.0705882, 0.0980392, 1 )
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 9 )
 
 [node name="index" type="Control"]
 anchor_right = 1.0
@@ -29,118 +58,234 @@ __meta__ = {
 }
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 341.0
+margin_right = 600.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
-margin_left = 340.0
-margin_right = 682.0
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer2"]
+margin_right = 600.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
-custom_constants/margin_right = 30
-custom_constants/margin_left = 30
+size_flags_vertical = 3
+color = Color( 0.243137, 0.207843, 0.27451, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="Control" parent="HBoxContainer"]
+margin_left = 599.0
+margin_right = 1023.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 424, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.384314, 0.333333, 0.396078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
-margin_left = 30.0
-margin_right = 312.0
+margin_right = 424.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 6.546, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 44
+custom_constants/separation = 25
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 129.0
-margin_right = 282.0
-margin_bottom = 151.0
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 424.0
+margin_bottom = 146.0
+texture = ExtResource( 6 )
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 171.0
+margin_right = 424.0
+margin_bottom = 277.0
+custom_constants/separation = -14
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 424.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
-text = "YUSA GAMES"
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Welcome !"
+align = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 424.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "d]/f] sIff"
 align = 1
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 195.0
-margin_right = 282.0
-margin_bottom = 245.0
+margin_top = 302.0
+margin_right = 424.0
+margin_bottom = 373.0
+custom_constants/separation = 16
+alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
-margin_right = 282.0
-margin_bottom = 22.0
+margin_right = 424.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Email:"
+align = 1
 
-[node name="email" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
-margin_top = 26.0
-margin_right = 282.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 200, 0 )
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+margin_top = 48.0
+margin_right = 424.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="email" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 87.0
+margin_right = 337.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
+align = 1
 right_icon = ExtResource( 5 )
-placeholder_text = "Email"
 caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer3/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 87.0
+margin_right = 337.0
+margin_bottom = 23.0
+placeholder_text = "Email"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 289.0
-margin_right = 282.0
-margin_bottom = 339.0
+margin_top = 398.0
+margin_right = 424.0
+margin_bottom = 469.0
+custom_constants/separation = 16
+alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
-margin_right = 282.0
-margin_bottom = 22.0
+margin_right = 424.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Password:"
+align = 1
 
-[node name="password" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
-margin_top = 26.0
-margin_right = 282.0
-margin_bottom = 50.0
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 424.0
+margin_bottom = 71.0
+alignment = 1
+
+[node name="password" type="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 87.0
+margin_right = 337.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
 custom_icons/clear = ExtResource( 2 )
+align = 1
 secret = true
 right_icon = ExtResource( 3 )
-placeholder_text = "Password"
 caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="LineEdit" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 87.0
+margin_right = 337.0
+margin_bottom = 23.0
+secret = true
+placeholder_text = " Password"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 383.0
-margin_right = 282.0
-margin_bottom = 405.0
-custom_constants/separation = 90
+margin_top = 494.0
+margin_right = 424.0
+margin_bottom = 525.0
+custom_constants/separation = 67
+alignment = 1
 
-[node name="cancel" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 96.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="cancel" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 78.0
+margin_right = 178.0
+margin_bottom = 31.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/cancel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+custom_fonts/font = SubResource( 5 )
 text = "Cancel"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="login" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 186.0
-margin_right = 282.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="login" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 245.0
+margin_right = 345.0
+margin_bottom = 31.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/login"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+custom_fonts/font = SubResource( 5 )
 text = "Login"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="messagebox" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 449.0
-margin_right = 282.0
-margin_bottom = 471.0
+margin_top = 550.0
+margin_right = 424.0
+margin_bottom = 582.0
 size_flags_horizontal = 3
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+align = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 681.0
+visible = false
+margin_left = 810.0
 margin_right = 1023.0
 margin_bottom = 600.0
 size_flags_horizontal = 3

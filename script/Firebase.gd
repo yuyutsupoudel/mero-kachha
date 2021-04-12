@@ -61,7 +61,6 @@ func save_document(path:String, fields:Dictionary, http:HTTPRequest)-> void:
 	var document := {"fields": fields}
 	var body := to_json(document)
 	var url= FIRESTORE_URL + path
-	print(url)
 	http.request(url,_get_request_headers(),false,HTTPClient.METHOD_POST, body)
 	
 func update_document(path : String, fields: Dictionary, http: HTTPRequest) -> void:
