@@ -136,6 +136,7 @@ margin_right = 88.0
 margin_bottom = 27.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Refresh"
+align = 1
 
 [node name="AddNew" type="Button" parent="VBoxContainer/PanelContainer/GridContainer/HBoxContainer"]
 margin_left = 116.0
@@ -632,7 +633,7 @@ margin_right = 584.0
 margin_bottom = 377.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 10
+custom_constants/margin_right = 0
 custom_constants/margin_top = 15
 custom_constants/margin_left = 15
 custom_constants/margin_bottom = 30
@@ -640,17 +641,17 @@ custom_constants/margin_bottom = 30
 [node name="PanelContainer" type="PanelContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 300.0
+margin_right = 310.0
 margin_bottom = 347.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 283.0
+margin_right = 293.0
 margin_bottom = 330.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
-margin_right = 281.0
+margin_right = 291.0
 margin_bottom = 328.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -806,63 +807,63 @@ text = ":"
 
 [node name="Data" type="VBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 margin_left = 88.0
-margin_right = 281.0
+margin_right = 291.0
 margin_bottom = 328.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 22.0
 
 [node name="EditId" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 32.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 54.0
 placeholder_text = "Unique ID number"
 
 [node name="EditPhone" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 64.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 86.0
 
 [node name="EditName" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 96.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 118.0
 
 [node name="EditEmail" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 128.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 150.0
 placeholder_text = "Unique Email address"
 
 [node name="EditPassword" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 160.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 182.0
 secret = true
 
 [node name="EditPassword2" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 192.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 214.0
 secret = true
 
 [node name="EditFacility" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 224.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 246.0
 
 [node name="EditAddress" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 256.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 278.0
 
 [node name="EditGender" type="OptionButton" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data"]
 margin_top = 288.0
-margin_right = 193.0
+margin_right = 203.0
 margin_bottom = 310.0
 text = "Male"
 items = [ "Male", null, false, 0, null, "Female", null, false, 1, null, "Other", null, false, 2, null ]

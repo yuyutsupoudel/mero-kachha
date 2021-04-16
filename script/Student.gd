@@ -242,7 +242,7 @@ func _on_LoadPicture_pressed():
 	get_node("FileDialog").popup()
 
 func _on_ClearPicture_pressed():
-	 _on_EditGender_item_selected(EditGender.text)
+	 _on_EditGender_item_selected(int(EditGender.text))
 
 func _on_Cancel_pressed():
 	get_node("EditDialog").hide()
