@@ -8,7 +8,6 @@ onready var http2 = get_node("HTTPRequest2")
 func _ready():
 	OS.window_borderless=true
 	OS.window_resizable=false
-	
 func _on_login_pressed():
 	if email.text.empty() or password.text.empty():
 		textbox.set_text("Please enter Email and password.")

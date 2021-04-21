@@ -72,6 +72,7 @@ func on_item_button_pressed(item_name : String, button_name : String):
 		EditTeacherSelectable.visible = true
 		EditName.visible=true
 		EditId.visible=true
+		EditId.editable = false
 		EditTag.visible=true
 		EditTeacherSelectable.visible = true
 		
@@ -83,7 +84,6 @@ func on_item_button_pressed(item_name : String, button_name : String):
 		
 		saveButton.disabled = false
 		mainLabel.text = "Edit :  "+Global.all_class_data.documents[selected].fields.id.stringValue
-		EditId.editable=true
 		#set data to edit dialog
 		EditId.text = Global.all_class_data.documents[selected].fields.id.stringValue
 		EditName.text=Global.all_class_data.documents[selected].fields.name.stringValue
@@ -102,6 +102,7 @@ func _on_AddNew_pressed():
 	EditName.visible=true
 	EditId.visible=true
 	EditTag.visible=true
+	EditId.editable =true
 	
 	LabelTeacher.visible=false
 	LabelId.visible=false
@@ -158,41 +159,45 @@ func _on_Button2_pressed():
 	if save_button_state=="view":
 		get_node("WarningDialog").popup()
 	else:
-		var class_info = {
-		"id":{"stringValue":EditId.text},
-		"name":{"stringValue":EditName.text},
-		"tag" : {"stringValue":EditTag.text},
-		"teacher":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.name.stringValue},
-		"teacherid":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.email.stringValue},
-		"discription":{"stringValue":EditDiscription.text}
-		}
-		local_teacher_data=Global.all_teacher_data.documents[EditTeacherSelectable.selected]
-		#adds class details into teacher
-		if "values" in local_teacher_data.fields.cls_id.arrayValue:
-			var is_not_present = true
-			#checks if new class added is already presented in teacher
-			for i in range (0,local_teacher_data.fields.cls_id.arrayValue.values.size()):
-				if local_teacher_data.fields.cls_id.arrayValue.values[i].hash()=={"stringValue":EditId.text}.hash():
-					is_not_present = false
-					break
-			if is_not_present:
-				local_teacher_data.fields.cls_id.arrayValue.values.push_back({"stringValue":EditId.text})
-				local_teacher_data.fields.cls_name.arrayValue.values.push_back({"stringValue":EditName.text})
+		if Global.all_teacher_data==null:
+			NotificationLabel.text="Create a teacher first."
+			yield(get_tree().create_timer(2.0),"timeout")
+			NotificationLabel.text=""
 		else:
-			local_teacher_data.fields["cls_id"]={"arrayValue":{"values":[{"stringValue":EditId.text}]}}
-			local_teacher_data.fields["cls_name"]={"arrayValue":{"values":[{"stringValue":EditName.text}]}}
+			var class_info = {
+			"id":{"stringValue":EditId.text},
+			"name":{"stringValue":EditName.text},
+			"tag" : {"stringValue":EditTag.text},
+			"teacher":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.name.stringValue},
+			"teacherid":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.email.stringValue},
+			"discription":{"stringValue":EditDiscription.text}
+			}
+			local_teacher_data=Global.all_teacher_data.documents[EditTeacherSelectable.selected]
+			#adds class details into teacher
+			if "values" in local_teacher_data.fields.cls_id.arrayValue:
+				var is_not_present = true
+				#checks if new class added is already presented in teacher
+				for i in range (0,local_teacher_data.fields.cls_id.arrayValue.values.size()):
+					if local_teacher_data.fields.cls_id.arrayValue.values[i].hash()=={"stringValue":EditId.text}.hash():
+						is_not_present = false
+						break
+				if is_not_present:
+					local_teacher_data.fields.cls_id.arrayValue.values.push_back({"stringValue":EditId.text})
+					local_teacher_data.fields.cls_name.arrayValue.values.push_back({"stringValue":EditName.text})
+			else:
+				local_teacher_data.fields["cls_id"]={"arrayValue":{"values":[{"stringValue":EditId.text}]}}
+				local_teacher_data.fields["cls_name"]={"arrayValue":{"values":[{"stringValue":EditName.text}]}}
+			#----------------------------------------------------------------------
+			if save_button_state=="new":
+				NotificationLabel.text="(1/2) Creating class.."
+				var path = "class/"+Firebase.user_info.id+"/classes/?documentId=%s" %EditId.text
+				Firebase.save_document(path,class_info,get_node("HTTPRequest2"))
+			#----------------------------------------------------------------------
+			elif save_button_state=="edit":
+				NotificationLabel.text="(1/2) Updating class.."
+				var path = "class/"+Firebase.user_info.id+"/classes/%s" %EditId.text
+				Firebase.update_document(path,class_info,get_node("HTTPRequest3"))
 		#----------------------------------------------------------------------
-		if save_button_state=="new":
-			NotificationLabel.text="(1/2) Creating class.."
-			var http = get_node("HTTPRequest2")
-			var path = "class/"+Firebase.user_info.id+"/classes/?documentId=%s" %EditId.text
-			Firebase.save_document(path,class_info,http)
-		#----------------------------------------------------------------------
-		elif save_button_state=="edit":
-			NotificationLabel.text="(1/2) Updating class.."
-			var path = "class/"+Firebase.user_info.id+"/classes/%s" %EditId.text
-			Firebase.update_document(path,class_info,get_node("HTTPRequest3"))
-	#----------------------------------------------------------------------
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	if response_code==0:
 		textbox.set_text("CAN NOT CONNECT TO THE SERVER.")

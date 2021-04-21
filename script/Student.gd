@@ -108,7 +108,6 @@ func on_item_button_pressed(item_name:String,button_name:String):
 		EditTextbox.text=""
 		EditId.editable = false
 		EditId.text=""
-		EditId.placeholder_text = "Id can not be changed."
 		EditPassword.editable = false
 		EditPassword.text=""
 		EditPassword.placeholder_text = "Password can not be changed."
@@ -275,6 +274,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		
 func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	print(response_code)
 	if response_code!= 200:
 		EditTextbox.text = response_body.error.message
 		yield(get_tree().create_timer(2.0),"timeout")
