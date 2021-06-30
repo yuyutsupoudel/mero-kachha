@@ -34,6 +34,7 @@ onready var viewProfile = get_node("ViewDialog/VBoxContainer/HBoxContainer/Margi
 onready var viewTextbox = get_node("ViewDialog/VBoxContainer/Label")
 var  selected
 var selected_id
+var teacher_uid
 var sn = 0
 var profile = {}
 
@@ -159,7 +160,6 @@ func _on_Cancel_pressed():
 	get_node("EditDialog").hide()
 
 func _on_Save_pressed():
-	
 	profile={
 		"address":{"stringValue":EditAddress.text},
 		"cls_id":{"arrayValue":{}},
@@ -169,11 +169,14 @@ func _on_Save_pressed():
 		"gender":{"stringValue":str(EditGender.selected)},
 		"id":{"stringValue":EditId.text},
 		"name":{"stringValue":EditName.text},
-		"phone":{"stringValue":EditPhone.text}
+		"phone":{"stringValue":EditPhone.text},
+		"type":{"stringValue":"teacher"},
+		"profile_pic":{"stringValue":""}
 	}
 	var class_id_array = [{}]
 	var class_name_array = [{}]
 	if EditId.editable == true:
+		#add new
 		if EditEmail.text.empty() or EditPassword.text.empty() or EditPassword2.text.empty() or EditPassword.text !=EditPassword2.text:
 			yield(get_tree().create_timer(2.0),"timeout")
 			EditTextbox.text="Please check Email or password."
@@ -182,6 +185,8 @@ func _on_Save_pressed():
 			Firebase.register(EditEmail.text,EditPassword2.text,get_node("HTTPRequest4"))
 
 	else:
+		#update 
+		profile.profile_pic={"stringValue":str(Global.all_teacher_data.documents[selected].fields.profile_pic.stringValue)}
 		EditTextbox.text="Updating data.."
 		profile.cls_id=Global.all_teacher_data.documents[selected].fields.cls_id
 		profile.cls_name = Global.all_teacher_data.documents[selected].fields.cls_name
@@ -235,7 +240,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		set_teacher_data(teacher_info)
 
 func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
-	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	var response_body:=JSON.parse(body.get_string_from_ascii())
 	if response_code!= 200:
 		EditTextbox.text = response_body.result.error.message
 		yield(get_tree().create_timer(2.0),"timeout")
@@ -275,11 +280,13 @@ func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 			yield(get_tree().create_timer(2.0),"timeout")
 			EditTextbox.text=""
 	else:
+		teacher_uid=response_body.result.localId
 		EditTextbox.text = "(2/3) Saving teacher data...."
 		var user_type ={
+			"uid":{"stringValue":teacher_uid},
 			"admin":{"stringValue":Firebase.user_info.id},
 			"type":{"stringValue":"teacher"}}
-		var path = "user_type?documentId=%s"%profile.email.stringValue
+		var path = "uid_lookUp?documentId=%s"%profile.email.stringValue
 		Firebase.save_document(path,user_type,get_node("HTTPRequest5"))
 
 func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
@@ -291,7 +298,7 @@ func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
 		EditTextbox.text=response_body.result.error.message
 		return
 	EditTextbox.text = "(3/3) Saving teacher data...."
-	var path = "teacher/"+Firebase.user_info.id+"/teachers?documentId=%s" %profile.email.stringValue
+	var path = "teacher/"+Firebase.user_info.id+"/teachers?documentId=%s" %teacher_uid
 	Firebase.save_document(path,profile,get_node("HTTPRequest2"))
 
 func _on_HTTPRequest6_request_completed(result, response_code, headers, body):

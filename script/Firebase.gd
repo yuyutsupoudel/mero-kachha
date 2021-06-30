@@ -24,6 +24,9 @@ func register(email:String, password:String, http: HTTPRequest) -> void:
 		"password": password,
 	}
 	http.request(REGISTER_URL,[], false, HTTPClient.METHOD_POST,to_json(body))
+	var result := yield(http, "request_completed") as Array
+	if result[1] ==200:
+		var user_info_new = _get_user_info(result)
 
 func _user_login(email : String, password : String,http:HTTPRequest,http2:HTTPRequest):
 	var body = {
@@ -36,7 +39,7 @@ func _user_login(email : String, password : String,http:HTTPRequest,http2:HTTPRe
 	var result := yield(http, "request_completed") as Array
 	if result[1] ==200:
 		user_info = _get_user_info(result)
-		var path = FIRESTORE_URL+"user_type/%s"%user_info.id
+		var path = FIRESTORE_URL+"uid_lookUp/%s"%email
 		http2.request(path,_get_request_headers(),false,HTTPClient.METHOD_GET)
 		var result2 := yield(http, "request_completed") as Array
 		

@@ -39,6 +39,7 @@ var selected_id
 var sn = 0
 var profile = {}
 var all_student_data
+var student_uid
 
 func _ready():
 	textbox.text ="Connecting to database.."
@@ -184,7 +185,9 @@ func _on_Save_pressed():
 		"gender":{"stringValue":str(EditGender.selected)},
 		"id":{"stringValue":EditId.text},
 		"name":{"stringValue":EditName.text},
-		"phone":{"stringValue":EditPhone.text}
+		"phone":{"stringValue":EditPhone.text},
+		"type":{"stringValue":"student"},
+		"profile_pic":{"stringValue":""}
 	}
 	
 	var class_id_array = []
@@ -210,6 +213,7 @@ func _on_Save_pressed():
 	
 	else:
 		#update student
+		profile.profile_pic={"stringValue":str(all_student_data.documents[selected].fields.profile_pic.stringValue)}
 		EditTextbox.text="Updating data.."
 		var current_profile =all_student_data.documents[selected]
 		var path = "student/"+Firebase.user_info.id+"/students/%s" %selected_id
@@ -314,11 +318,13 @@ func _on_HTTPRequest4_request_completed(result, response_code, headers, body):
 			yield(get_tree().create_timer(2.0),"timeout")
 			EditTextbox.text=""
 	else:
+		student_uid=response_body.result.localId
 		EditTextbox.text = "(2/3) Saving student data...."
 		var user_type ={
+			"uid":{"stringValue":student_uid},
 			"admin":{"stringValue":Firebase.user_info.id},
 			"type":{"stringValue":"student"}}
-		var path = "user_type?documentId=%s"%profile.email.stringValue
+		var path = "uid_lookUp?documentId=%s"%profile.email.stringValue
 		Firebase.save_document(path,user_type,get_node("HTTPRequest5"))
 
 func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
@@ -330,7 +336,7 @@ func _on_HTTPRequest5_request_completed(result, response_code, headers, body):
 		EditTextbox.text=response_body.result.error.message
 		return
 	EditTextbox.text = "(3/3) Saving student data...."
-	var path = "student/"+Firebase.user_info.id+"/students?documentId=%s" %profile.email.stringValue
+	var path = "student/"+Firebase.user_info.id+"/students?documentId=%s" %student_uid
 	Firebase.save_document(path,profile,get_node("HTTPRequest2"))
 
 func _on_HTTPRequest6_request_completed(result, response_code, headers, body):

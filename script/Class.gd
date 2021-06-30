@@ -25,7 +25,8 @@ var class_info = {
 	"tag" : {},
 	"teacher":{},
 	"teacherid":{},
-	"Discription":{}
+	"discription":{},
+	"docs":{}
 }
 func _ready():
 	textbox.visible = true
@@ -170,7 +171,8 @@ func _on_Button2_pressed():
 			"tag" : {"stringValue":EditTag.text},
 			"teacher":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.name.stringValue},
 			"teacherid":{"stringValue":Global.all_teacher_data.documents[EditTeacherSelectable.selected].fields.email.stringValue},
-			"discription":{"stringValue":EditDiscription.text}
+			"discription":{"stringValue":EditDiscription.text},
+			"docs":{"arrayValue":{}}
 			}
 			local_teacher_data=Global.all_teacher_data.documents[EditTeacherSelectable.selected]
 			#adds class details into teacher
@@ -194,6 +196,7 @@ func _on_Button2_pressed():
 				Firebase.save_document(path,class_info,get_node("HTTPRequest2"))
 			#----------------------------------------------------------------------
 			elif save_button_state=="edit":
+				class_info.docs=Global.all_class_data.documents[selected].fields.docs
 				NotificationLabel.text="(1/2) Updating class.."
 				var path = "class/"+Firebase.user_info.id+"/classes/%s" %EditId.text
 				Firebase.update_document(path,class_info,get_node("HTTPRequest3"))
@@ -228,12 +231,12 @@ func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 		var path = "teacher/"+Firebase.user_info.id+"/teachers/%s" %teacher_id
 		Firebase.update_document(path,local_teacher_data.fields,get_node("HTTPRequest4"))
 	else:
-		NotificationLabel.text="G0t error."
+		NotificationLabel.text="Got error."
 		yield(get_tree().create_timer(2),"timeout")
 		NotificationLabel.text=""
 
 func _on_HTTPRequest3_request_completed(result, response_code, headers, body):
-	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
+	var response_body:=JSON.parse(body.get_string_from_ascii())
 	if response_code!= 200:
 		NotificationLabel.text = response_body.result.error.message
 		yield(get_tree().create_timer(2.0),"timeout")
