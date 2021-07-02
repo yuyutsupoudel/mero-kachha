@@ -18,7 +18,7 @@ onready var EditAddress =get_node("EditDialog/VBoxContainer/HBoxContainer/Margin
 onready var EditGender =get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Data/EditGender")
 onready var EditNameLabel = get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Label")
 onready var EditTextbox = get_node("EditDialog/VBoxContainer/Label")
-
+onready var EditProfile=get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Profile")
 onready var textbox = get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table/Label")
 
 onready var viewLabel = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Label")
@@ -32,6 +32,7 @@ onready var viewGender = get_node("ViewDialog/VBoxContainer/HBoxContainer/Margin
 onready var ViewClassList = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer/ViewClassList/Table")
 onready var viewProfile = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/PanelContainer/Profile")
 onready var viewTextbox = get_node("ViewDialog/VBoxContainer/Label")
+
 var  selected
 var selected_id
 var teacher_uid
@@ -42,10 +43,22 @@ func _ready():
 	textbox.text ="Connecting to database.."
 	var path = "teacher/%s/teachers/" %Firebase.user_info.id
 	Firebase.get_document(path,get_node("HTTPRequest"))
+
+func downloadComplected():
+	var profileTexture=ImageTexture.new()
+	var image = Image.new()
+	image.load("res://Buffer/"+selected_id+"."+Global.all_teacher_data.documents[selected].fields.profile_pic.stringValue.split(".",true,0)[-1].split("?",true,0)[0])
+	profileTexture.create_from_image(image)
+	profileTexture.set_size_override(Vector2(256,256))
+	viewProfile.texture=profileTexture
+	EditProfile.texture=profileTexture
 	
 func on_item_button_pressed(item_name:String,button_name:String):
 	selected = int(item_name)-1
 	selected_id = Global.all_teacher_data.documents[selected].name.split("/",true,0)[-1]
+	if Global.all_teacher_data.documents[selected].fields.profile_pic.stringValue!="null":
+		var name = selected_id+"."+Global.all_teacher_data.documents[selected].fields.profile_pic.stringValue.split(".",true,0)[-1].split("?",true,0)[0]
+		Firebase.download_file(Global.all_teacher_data.documents[selected].fields.profile_pic.stringValue,name,"Teacher")
 	if button_name == "view":
 		#Removes any clild that may present in view class table
 		var node = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer/ViewClassList/Table/")
@@ -171,7 +184,7 @@ func _on_Save_pressed():
 		"name":{"stringValue":EditName.text},
 		"phone":{"stringValue":EditPhone.text},
 		"type":{"stringValue":"teacher"},
-		"profile_pic":{"stringValue":""}
+		"profile_pic":{"stringValue":"null"}
 	}
 	var class_id_array = [{}]
 	var class_name_array = [{}]
