@@ -21,6 +21,7 @@ onready var EditNameLabel = get_node("EditDialog/VBoxContainer/HBoxContainer/Mar
 onready var EditTextbox = get_node("EditDialog/VBoxContainer/Label")
 onready var EditClassList=get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer3/VBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ScrollContainer/Container")
 onready var textbox = get_node("VBoxContainer/PanelContainer2/ScrollContainer/Table/Label")
+onready var EditProfile = get_node("EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Profile")
 
 onready var viewLabel = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Label")
 onready var viewId = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Field/Value/ViewId")
@@ -45,7 +46,17 @@ func _ready():
 	textbox.text ="Connecting to database.."
 	var path = "student/%s/students/" %Firebase.user_info.id
 	Firebase.get_document(path,get_node("HTTPRequest"))
-
+	
+func downloadComplected():
+	var profileTexture=ImageTexture.new()
+	var image = Image.new()
+	image.load("res://Buffer/"+selected_id+"."+all_student_data.documents[selected].fields.profile_pic.stringValue.split(".",true,0)[-1].split("?",true,0)[0])
+	profileTexture.create_from_image(image)
+	profileTexture.set_size_override(Vector2(256,256))
+	viewProfile.texture=profileTexture
+	EditProfile.texture=profileTexture
+	
+	
 func set_student_data(data:Dictionary):
 	sn=sn+1
 	var new_item = template.instance()
@@ -61,9 +72,13 @@ func set_student_data(data:Dictionary):
 func on_item_button_pressed(item_name:String,button_name:String):
 	selected = int(item_name)-1
 	selected_id = all_student_data.documents[selected].name.split("/",true,0)[-1]
+	if all_student_data.documents[selected].fields.profile_pic.stringValue!="null":
+		var name = selected_id+"."+all_student_data.documents[selected].fields.profile_pic.stringValue.split(".",true,0)[-1].split("?",true,0)[0]
+		Firebase.download_file(all_student_data.documents[selected].fields.profile_pic.stringValue,name,"Student")
 	if button_name == "view":
 		#Removes any clild that may present in view class table
 		var node = get_node("ViewDialog/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer/HBoxContainer/Data/Panel/VBoxContainer/ViewClassList/Table/")
+			
 		for n in node.get_children():
 			node.remove_child(n)
 			n.queue_free()
@@ -187,9 +202,9 @@ func _on_Save_pressed():
 		"name":{"stringValue":EditName.text},
 		"phone":{"stringValue":EditPhone.text},
 		"type":{"stringValue":"student"},
-		"profile_pic":{"stringValue":""}
+		"profile_pic":{"stringValue":"null"}
 	}
-	
+		
 	var class_id_array = []
 	var class_name_array = []
 	
@@ -278,7 +293,6 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		
 func _on_HTTPRequest2_request_completed(result, response_code, headers, body):
 	var response_body:=JSON.parse(body.get_string_from_ascii()).result as Dictionary
-	print(response_code)
 	if response_code!= 200:
 		EditTextbox.text = response_body.error.message
 		yield(get_tree().create_timer(2.0),"timeout")

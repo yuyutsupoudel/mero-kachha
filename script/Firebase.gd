@@ -4,6 +4,10 @@ var LOGIN_URL
 var REGISTER_URL
 var user_info = {}
 
+signal teacherDownload
+signal studentDownload
+
+
 func _ready():
 	var file_data=get_file_data("res://data_file.json")
 	REGISTER_URL="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+ file_data.apikey
@@ -42,12 +46,11 @@ func _user_login(email : String, password : String,http:HTTPRequest,http2:HTTPRe
 		var path = FIRESTORE_URL+"uid_lookUp/%s"%email
 		http2.request(path,_get_request_headers(),false,HTTPClient.METHOD_GET)
 		var result2 := yield(http, "request_completed") as Array
-		
+	
 func _get_user_info(result:Array) -> Dictionary:
 	var result_body := JSON.parse(result[3].get_string_from_ascii()).result as Dictionary
 	return {"token" : result_body.idToken,
 			"id": result_body.localId}
-
 
 func _get_request_headers() ->PoolStringArray:
 	return PoolStringArray([
@@ -59,7 +62,6 @@ func get_document(path: String, http: HTTPRequest) -> void:
 	var url= FIRESTORE_URL+path
 	http.request(url,_get_request_headers(), false, HTTPClient.METHOD_GET)
 	
-
 func save_document(path:String, fields:Dictionary, http:HTTPRequest)-> void:
 	var document := {"fields": fields}
 	var body := to_json(document)
@@ -75,3 +77,13 @@ func update_document(path : String, fields: Dictionary, http: HTTPRequest) -> vo
 func delete_document(path: String, http: HTTPRequest) ->void:
 	var url= FIRESTORE_URL + path
 	http.request(url, _get_request_headers(),false,HTTPClient.METHOD_DELETE)
+	
+func download_file(url:String,name: String,signalpath: String):
+	var download_request= HTTPRequest.new()
+	add_child(download_request)
+	download_request.set_download_file("res://Buffer/"+name)
+	download_request.request(url)
+	var result := yield(download_request, "request_completed") as Array
+	if result[1]==200:
+			get_tree().call_group(signalpath,"downloadComplected")
+	

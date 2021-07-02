@@ -12,7 +12,9 @@
 use_filter = true
 font_data = ExtResource( 5 )
 
-[node name="Teacher" type="Control"]
+[node name="Teacher" type="Control" groups=[
+"Teacher",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 6 )
@@ -605,8 +607,10 @@ align = 1
 margin_top = 43.0
 margin_right = 256.0
 margin_bottom = 299.0
+rect_min_size = Vector2( 256, 256 )
 texture = ExtResource( 2 )
-stretch_mode = 3
+expand = true
+stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer"]
 margin_top = 313.0
